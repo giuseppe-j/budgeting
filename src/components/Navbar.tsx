@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { SearchIcon, MenuIcon } from "@heroicons/react/solid";
-import logo from "../images/monefy_logo.png";
+import logo from "../assets/images/logo.png";
 
 export default function Navbar() {
     const [navbarOpen, setNavbarOpen] = useState(false);

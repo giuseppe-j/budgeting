@@ -13,7 +13,7 @@ export default function Months() {
         return date;
     };
 
-    const getCurrent = (alpha) => {
+    const getCurrent = (alpha: number) => {
         const date = new Date(current.getTime());
         const newDate = new Date(date.setMonth(date.getMonth() + alpha));
         const previousNewDate = new Date(date.setMonth(date.getMonth() - 1));
@@ -23,7 +23,7 @@ export default function Months() {
         setNext(nextNewDate);
     };
 
-    const isCurrentYear = (date) => {
+    const isCurrentYear = (date: Date) => {
         return date.getFullYear() === new Date().getFullYear();
     };
 
