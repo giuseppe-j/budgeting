@@ -1,9 +1,8 @@
 import { useForm } from "react-hook-form";
-import { yupResolver } from "@hookform/resolvers/yup";
-import * as yup from "yup";
 
 import * as Types from "../shared/types";
 import * as Constants from "../shared/constants";
+import { useEffect } from "react";
 
 interface Props {
     showModal: boolean;
@@ -12,15 +11,6 @@ interface Props {
     setShowModal: (value: boolean) => void;
     handleAddMovement: (movement: Types.Movement) => void;
 }
-
-const FormSchema = yup.object().shape({
-    description: yup.string().required("Description is required"),
-    amount: yup
-        .number()
-        .typeError("A number is required")
-        .min(0, "Min value 0."),
-    type: yup.string(),
-});
 
 export default function AddMovement({
     showModal,
@@ -32,10 +22,13 @@ export default function AddMovement({
     const {
         register,
         handleSubmit,
+        setValue,
         formState: { errors },
-    } = useForm<Types.Movement>({
-        resolver: yupResolver(FormSchema),
-    });
+    } = useForm<Types.Movement>();
+
+    useEffect(() => {
+        setValue("type", movementType);
+    }, [movementType, setValue]);
 
     const onSubmit = handleSubmit((movement) => handleAddMovement(movement));
 
@@ -74,11 +67,13 @@ export default function AddMovement({
                                         <input
                                             className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 focus:outline-none focus:shadow-outline"
                                             type="text"
-                                            {...register("description")}
+                                            {...register("description", {
+                                                required: true,
+                                            })}
                                         />
                                         {errors.description && (
                                             <p className="text-xs text-red-700">
-                                                {errors.description.message}
+                                                Description is required
                                             </p>
                                         )}
                                     </div>
@@ -136,12 +131,16 @@ export default function AddMovement({
                                         </label>
                                         <input
                                             className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 focus:outline-none focus:shadow-outline"
-                                            {...register("amount")}
-                                            type="text"
+                                            type="number"
+                                            step="0.01"
+                                            {...register("amount", {
+                                                required: true,
+                                                valueAsNumber: true,
+                                            })}
                                         />
                                         {errors.amount && (
                                             <p className="text-xs text-red-700">
-                                                {errors.amount.message}
+                                                Amount is required
                                             </p>
                                         )}
                                     </div>
@@ -155,7 +154,6 @@ export default function AddMovement({
                                         </button>
                                         <button
                                             type="submit"
-                                            value="submit"
                                             className="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-indigo-500 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:ml-3 sm:w-auto sm:text-sm"
                                         >
                                             Save
@@ -169,4 +167,7 @@ export default function AddMovement({
             </div>
         </div>
     );
+}
+function setValue(arg0: string, movementType: string) {
+    throw new Error("Function not implemented.");
 }
