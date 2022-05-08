@@ -36,9 +36,12 @@ export default function Months() {
     }, [current]);
 
     return (
-        <div className="flex justify-between">
+        <div className="flex justify-between py-5">
             <div className="flex-1">
-                <button className="capitalize" onClick={() => getCurrent(-1)}>
+                <button
+                    className="capitalize text-white"
+                    onClick={() => getCurrent(-1)}
+                >
                     {previous.toLocaleString("default", {
                         month: "long",
                         year: isCurrentYear(previous) ? undefined : "numeric",
@@ -46,14 +49,14 @@ export default function Months() {
                 </button>
             </div>
             <div className="flex-1 text-center">
-                <span className="capitalize">
+                <span className="capitalize text-xl text-white">
                     {current.toLocaleString("default", {
                         month: "long",
                         year: isCurrentYear(current) ? undefined : "numeric",
                     })}
                 </span>
             </div>
-            <div className="flex-1 text-right">
+            <div className="flex-1 text-right text-white">
                 <button
                     className="capitalize disabled:opacity-50"
                     onClick={() => getCurrent(1)}
