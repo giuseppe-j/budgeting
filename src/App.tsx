@@ -9,19 +9,17 @@ import { useEffect, useState } from "react";
 
 import { v4 as uuid } from "uuid";
 
-import * as Constants from "./shared/constants";
 import * as Types from "./shared/types";
 
 export default function App() {
     const [movements, setMovements] = useState<Types.Movement[]>([]);
-    const [movementType, setMovementType] = useState<string>(Constants.INCOME);
+    const [movementType, setMovementType] = useState<string>("");
     const [showModal, setShowModal] = useState<boolean>(false);
 
     useEffect(() => {
         const fetchFromLocalStorage = async () => {
             const movements = fetchDataFromLocalStorage();
             setMovements(movements);
-            console.log(movements);
         };
         fetchFromLocalStorage();
     }, []);
@@ -39,7 +37,7 @@ export default function App() {
             <div className="bg-gradient-to-t from-sky-500 to-cyan-400">
                 <Navbar />
                 <Months />
-                <Balance />
+                <Balance movements={movements} />
             </div>
             <div className="container mx-auto">
                 <div className="w-full bg-white sm:w-9/12 lg:w-8/12 mx-auto relative">
