@@ -7,7 +7,7 @@ type Props = {
 
 export default function AddButtons(props: Props) {
     return (
-        <div className="px-4 mx-auto left-2/4 -translate-x-2/4 flex flex-wrap items-center justify-center bottom-3 absolute">
+        <div className="px-4 py-5 mx-auto flex flex-wrap items-center justify-center">
             <button
                 className="inline-flex items-center px-3 py-3 border-2 border-teal-600 hover:bg-teal-200 text-white text-sm font-medium rounded-full"
                 onClick={() => {

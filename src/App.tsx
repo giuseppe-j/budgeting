@@ -15,6 +15,7 @@ export default function App() {
     const [movements, setMovements] = useState<Types.Movement[]>([]);
     const [movementType, setMovementType] = useState<string>("");
     const [showModal, setShowModal] = useState<boolean>(false);
+    const [currentDate, setCurrentDate] = useState<Date>(new Date());
 
     useEffect(() => {
         const fetchFromLocalStorage = async () => {
@@ -33,14 +34,14 @@ export default function App() {
     };
 
     return (
-        <div className="h-screen bg-sky-100">
+        <div className="h-screen bg-sky-100 overflow-auto">
             <div className="bg-gradient-to-t from-sky-500 to-cyan-400">
                 <Navbar />
-                <Months />
+                <Months handleCurrentDate={setCurrentDate} />
                 <Balance movements={movements} />
             </div>
             <div className="container mx-auto">
-                <div className="w-full bg-white sm:w-9/12 lg:w-8/12 mx-auto relative">
+                <div className="w-full bg-white sm:w-9/12 lg:w-8/12 mx-auto">
                     <AddButtons
                         setShowModal={setShowModal}
                         setMovementType={setMovementType}
@@ -48,13 +49,15 @@ export default function App() {
                     <MovementList movements={movements} />
                 </div>
             </div>
-            <AddMovement
-                showModal={showModal}
-                setShowModal={setShowModal}
-                movementType={movementType}
-                setMovementType={setMovementType}
-                handleAddMovement={addMovement}
-            />
+            {showModal && (
+                <AddMovement
+                    setShowModal={setShowModal}
+                    movementType={movementType}
+                    setMovementType={setMovementType}
+                    handleAddMovement={addMovement}
+                    currentDate={currentDate}
+                />
+            )}
         </div>
     );
 }

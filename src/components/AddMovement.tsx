@@ -1,39 +1,52 @@
-import { useForm } from "react-hook-form";
+import { Controller, useForm } from "react-hook-form";
 
 import * as Types from "../shared/types";
 import * as Constants from "../shared/constants";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import DatePicker from "react-date-picker";
 
 interface Props {
-    showModal: boolean;
     movementType: string;
     setMovementType: (value: string) => void;
     setShowModal: (value: boolean) => void;
     handleAddMovement: (movement: Types.Movement) => void;
+    currentDate: Date;
 }
 
 export default function AddMovement({
-    showModal,
     movementType,
     setMovementType,
     setShowModal,
     handleAddMovement,
+    currentDate,
 }: Props) {
     const {
         register,
         handleSubmit,
         setValue,
         formState: { errors },
+        control,
     } = useForm<Types.Movement>();
+
+    const [date, setDate] = useState(currentDate);
 
     useEffect(() => {
         setValue("type", movementType);
     }, [movementType, setValue]);
 
+    useEffect(() => {
+        setDate(currentDate);
+    }, [currentDate]);
+
     const onSubmit = handleSubmit((movement) => handleAddMovement(movement));
 
+    const handleChange = (date: Date, field: any) => {
+        field.onChange(date);
+        setDate(date);
+    };
+
     return (
-        <div className={showModal ? "" : "hidden"}>
+        <div>
             <div
                 className="fixed z-10 inset-0 overflow-y-auto"
                 aria-labelledby="modal-title"
@@ -144,6 +157,46 @@ export default function AddMovement({
                                             </p>
                                         )}
                                     </div>
+                                    <div className="mb-6">
+                                        <label
+                                            className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+                                            htmlFor="date"
+                                        >
+                                            Date
+                                        </label>
+                                        <Controller
+                                            control={control}
+                                            name="date"
+                                            render={({ field }) => (
+                                                <DatePicker
+                                                    className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 focus:outline-none focus:shadow-outline"
+                                                    {...register("date")}
+                                                    onChange={(date: Date) =>
+                                                        handleChange(
+                                                            date,
+                                                            field
+                                                        )
+                                                    }
+                                                    minDate={
+                                                        new Date(
+                                                            currentDate.getFullYear(),
+                                                            currentDate.getMonth(),
+                                                            1
+                                                        )
+                                                    }
+                                                    maxDate={
+                                                        new Date(
+                                                            currentDate.getFullYear(),
+                                                            currentDate.getMonth() +
+                                                                1,
+                                                            0
+                                                        )
+                                                    }
+                                                    value={date}
+                                                />
+                                            )}
+                                        />
+                                    </div>
                                     <div className="flex items-center">
                                         <button
                                             onClick={() => setShowModal(false)}
@@ -167,7 +220,4 @@ export default function AddMovement({
             </div>
         </div>
     );
-}
-function setValue(arg0: string, movementType: string) {
-    throw new Error("Function not implemented.");
 }

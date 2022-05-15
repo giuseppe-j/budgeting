@@ -1,6 +1,10 @@
 import { useEffect, useState } from "react";
 
-export default function Months() {
+interface Props {
+    handleCurrentDate: (currentDate: Date) => void;
+}
+
+export default function Months(props: Props) {
     const getPrevious = () => {
         const date = new Date(current.getTime());
         date.setMonth(date.getMonth() - 1);
@@ -32,8 +36,8 @@ export default function Months() {
     const [next, setNext] = useState(() => getNext());
 
     useEffect(() => {
-        console.log(current);
-    }, [current]);
+        props.handleCurrentDate(current);
+    }, [current, props]);
 
     return (
         <div className="flex justify-between items-center py-5 px-4">
@@ -67,7 +71,7 @@ export default function Months() {
                 </button>
             </div>
             <div className="text-center">
-                <span className="capitalize text-xl text-white">
+                <span className="capitalize text-xl text-white font-semibold">
                     {current.toLocaleString("default", {
                         month: "long",
                         year: isCurrentYear(current) ? undefined : "numeric",
