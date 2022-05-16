@@ -40,7 +40,10 @@ export default function AddMovement({
 
     const onSubmit = handleSubmit((movement) => handleAddMovement(movement));
 
-    const handleChange = (date: Date, field: any) => {
+    const handleChange = (
+        date: Date,
+        field: { onChange: (value: any) => void }
+    ) => {
         field.onChange(date);
         setDate(date);
     };

@@ -38,7 +38,7 @@ export default function App() {
             <div className="bg-gradient-to-t from-sky-500 to-cyan-400">
                 <Navbar />
                 <Months handleCurrentDate={setCurrentDate} />
-                <Balance movements={movements} />
+                <Balance movements={movements} currentDate={currentDate} />
             </div>
             <div className="container mx-auto">
                 <div className="w-full bg-white sm:w-9/12 lg:w-8/12 mx-auto">
@@ -46,7 +46,10 @@ export default function App() {
                         setShowModal={setShowModal}
                         setMovementType={setMovementType}
                     />
-                    <MovementList movements={movements} />
+                    <MovementList
+                        movements={movements}
+                        currentDate={currentDate}
+                    />
                 </div>
             </div>
             {showModal && (
