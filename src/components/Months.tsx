@@ -1,42 +1,19 @@
 import { useEffect, useState } from "react";
+import { getDate, isCurrentYear } from "../utils/date";
 
 interface Props {
     handleCurrentDate: (currentDate: Date) => void;
 }
 
 export default function Months(props: Props) {
-    const getPrevious = () => {
-        const date = new Date(current.getTime());
-        date.setMonth(date.getMonth() - 1);
-        return date;
-    };
-
-    const getNext = () => {
-        const date = new Date(current.getTime());
-        date.setMonth(date.getMonth() + 1);
-        return date;
-    };
-
-    const getCurrent = (alpha: number) => {
-        const date = new Date(current.getTime());
-        const newDate = new Date(date.setMonth(date.getMonth() + alpha));
-        const previousNewDate = new Date(date.setMonth(date.getMonth() - 1));
-        const nextNewDate = new Date(date.setMonth(date.getMonth() + 2));
-        setCurrent(newDate);
-        setPrevious(previousNewDate);
-        setNext(nextNewDate);
-    };
-
-    const isCurrentYear = (date: Date) => {
-        return date.getFullYear() === new Date().getFullYear();
-    };
-
     const [current, setCurrent] = useState(new Date());
-    const [previous, setPrevious] = useState(() => getPrevious());
-    const [next, setNext] = useState(() => getNext());
+    const [previous, setPrevious] = useState(() => getDate(current, -1));
+    const [next, setNext] = useState(() => getDate(current, 1));
 
     useEffect(() => {
         props.handleCurrentDate(current);
+        setPrevious(getDate(current, -1));
+        setNext(getDate(current, 1));
     }, [current, props]);
 
     return (
@@ -44,7 +21,7 @@ export default function Months(props: Props) {
             <div>
                 <button
                     className="capitalize text-white flex items-center"
-                    onClick={() => getCurrent(-1)}
+                    onClick={() => setCurrent(getDate(current, -1))}
                 >
                     <svg
                         xmlns="http://www.w3.org/2000/svg"
@@ -81,7 +58,7 @@ export default function Months(props: Props) {
             <div className="text-right text-white">
                 <button
                     className="capitalize disabled:opacity-50 flex items-center"
-                    onClick={() => getCurrent(1)}
+                    onClick={() => setCurrent(getDate(current, 1))}
                     disabled={next >= new Date()}
                 >
                     <span className="text-xs mr-1">

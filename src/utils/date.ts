@@ -1,3 +1,10 @@
-export const Somma = (a:number, b:number) => {
-    return a+b;
-}
+export const getDate = (currentDate : Date, alpha: number) => {
+    const date = new Date(currentDate.getTime());
+    date.setMonth(date.getMonth() + alpha);
+    return date;
+};
+
+export const isCurrentYear = (date: Date) => {
+    return date.getFullYear() === new Date().getFullYear();
+};
+

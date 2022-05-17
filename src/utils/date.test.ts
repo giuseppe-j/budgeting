@@ -1,12 +1,13 @@
-import { render, screen } from "@testing-library/react";
-import { Somma } from "./date";
+import { getDate, isCurrentYear } from "./date";
 
 describe('date.ts', () => {
-    test("Somma", () => {
-        expect(Somma(2,3)).toBe(5);
+    test("isCurrentYear of today", () => {
+        return expect(isCurrentYear(new Date())).toBe(true);
     });
-  
-    test('false is falsy', () => {
-      expect(false).toBe(false);
+    test("isCurrentYear of a past date", () => {
+        return expect(isCurrentYear(new Date(2021, 11, 17) )).toBe(false);
+    });
+    test("isCurrentYear of last day of past year ???", () => {
+      return expect(isCurrentYear(new Date(2021, 12, 31) )).toBe(true);
     });
   });
