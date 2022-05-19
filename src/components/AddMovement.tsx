@@ -4,6 +4,7 @@ import * as Types from "../shared/types";
 import * as Constants from "../shared/constants";
 import { useEffect, useState } from "react";
 import DatePicker from "react-date-picker";
+import "../styles/vendor.css";
 
 interface Props {
     movementType: string;
@@ -32,7 +33,8 @@ export default function AddMovement({
 
     useEffect(() => {
         setValue("type", movementType);
-    }, [movementType, setValue]);
+        setValue("date", date);
+    }, [movementType, date, setValue]);
 
     useEffect(() => {
         setDate(currentDate);

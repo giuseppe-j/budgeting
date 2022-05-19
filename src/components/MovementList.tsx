@@ -1,7 +1,7 @@
 import * as Types from "../shared/types";
 import * as Constants from "../shared/constants";
 
-import Moment from "moment";
+import { formatDDMMYYYY, formatMMYYYY } from "../utils/date";
 
 type Props = {
     movements: Types.Movement[];
@@ -9,18 +9,16 @@ type Props = {
 };
 
 export default function MovementList(props: Props) {
-    const formatCurrentDate = Moment(props.currentDate).format("MM-YYYY");
+    const formatCurrentDate = formatMMYYYY(props.currentDate);
     return (
         <div className="px-10 py-0 pb-5 shadow-lg text-gray-700">
             {props.movements
                 .filter((movement: Types.Movement) => {
-                    const formatDate = Moment(movement.date).format("MM-YYYY");
+                    const formatDate = formatMMYYYY(movement.date);
                     return formatDate === formatCurrentDate;
                 })
                 .map((movement: Types.Movement) => {
-                    const formatDate = Moment(movement.date).format(
-                        "DD-MM-YYYY"
-                    );
+                    const formatDate = formatDDMMYYYY(movement.date);
                     return (
                         <div key={movement.id}>
                             <div className="flex justify-between">
