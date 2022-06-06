@@ -4,4 +4,5 @@ export type Movement = {
     type: string;
     date: Date;
     amount: number;
+    category: string;
 };

@@ -8,8 +8,6 @@ export const getDate = (currentDate : Date, alpha: number) => {
 };
 
 export const isCurrentYear = (date: Date) => {
-    console.log(date)
-    console.log(new Date())
     return date.getFullYear() === new Date().getFullYear();
 };
 
