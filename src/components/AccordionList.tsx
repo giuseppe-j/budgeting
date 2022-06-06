@@ -31,11 +31,12 @@ export default function AccordionList(props: AccordionListProps) {
     };
 
     const hasMovement = (category: string) => {
-        return movements.some(
-            (m) =>
+        return movements.some((m) => {
+            return (
                 m.category === category &&
                 formatMMYYYY(m.date) === formatMMYYYY(currentDate)
-        );
+            );
+        });
     };
 
     return (

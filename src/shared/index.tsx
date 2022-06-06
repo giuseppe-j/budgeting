@@ -1,14 +1,21 @@
 import * as Types from "./types";
+import { db } from "./firebase";
+import { collection, addDoc, getDocs } from "firebase/firestore";
 
-export const fetchDataFromLocalStorage = () => {
-    const json: string = localStorage.getItem("react-budgeting") || "[]";
-    return JSON.parse(json) || [];
+export const fetchDataFromDB = async () => {
+    const snapshot = await getDocs(collection(db, "movements"));
+    const data = snapshot.docs
+        .map((doc) => doc.data())
+        .map((movement) => {
+            return { ...movement, date: movement.date.toDate() };
+        });
+    return data as Types.Movement[];
 };
 
-export const saveToLocalStorage = (items: Types.Movement[]) => {
-    const json: void = localStorage.setItem(
-        "react-budgeting",
-        JSON.stringify(items)
-    );
-    return json;
+export const saveToDB = async (movement: Types.Movement) => {
+    try {
+        await addDoc(collection(db, "movements"), movement);
+    } catch (err) {
+        alert(err);
+    }
 };

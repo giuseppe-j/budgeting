@@ -24,10 +24,7 @@ export default function MovementList(props: Props) {
                 .map((movement: Types.Movement) => {
                     const formatDate = formatDDMMYYYY(movement.date);
                     return (
-                        <div
-                            className="flex justify-between py-1"
-                            key={movement.id}
-                        >
+                        <div className="flex justify-between" key={movement.id}>
                             <div>
                                 <p className="font-semibold">
                                     {movement.description}

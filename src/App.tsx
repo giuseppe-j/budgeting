@@ -3,7 +3,7 @@ import Navbar from "./components/Navbar";
 import Months from "./components/Months";
 import AddMovement from "./components/AddMovement";
 import Balance from "./components/Balance";
-import { fetchDataFromLocalStorage, saveToLocalStorage } from "./shared";
+import { fetchDataFromDB, saveToDB } from "./shared";
 import { useEffect, useState } from "react";
 
 import { v4 as uuid } from "uuid";
@@ -21,7 +21,7 @@ export default function App() {
 
     useEffect(() => {
         const fetchFromLocalStorage = async () => {
-            const movements = await fetchDataFromLocalStorage();
+            const movements = await fetchDataFromDB();
             setMovements(movements);
         };
         fetchFromLocalStorage();
@@ -36,7 +36,7 @@ export default function App() {
         const newMovement = { ...movement, id };
         const newMovements = [...movements, newMovement];
         setMovements(newMovements);
-        saveToLocalStorage(newMovement);
+        saveToDB(newMovement);
         setShowModal(false);
         setSelectedCategory(getCategoryKey(newMovement.category));
     };
