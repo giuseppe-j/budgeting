@@ -49,7 +49,7 @@ export default function AccordionList(props: AccordionListProps) {
                                 key={category.key}
                                 open={open === category.key}
                                 onClick={() => handleOpen(category.key)}
-                                className="w-full"
+                                className="w-full py-2"
                             >
                                 <AccordionHeader>
                                     <div className="flex items-center">
