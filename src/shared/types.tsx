@@ -5,4 +5,5 @@ export type Movement = {
     date: Date;
     amount: number;
     category: string;
+    uid: string;
 };

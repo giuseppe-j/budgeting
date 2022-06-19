@@ -11,7 +11,13 @@ import { v4 as uuid } from "uuid";
 import * as Types from "./shared/types";
 import AccordionList from "./components/AccordionList";
 import { categories, getCategoryKey } from "./utils/categories";
-export default function Home() {
+import { User } from "firebase/auth";
+
+type Props = {
+    user: User;
+};
+
+export default function Home({ user }: Props) {
     const [movements, setMovements] = useState<Types.Movement[]>([]);
     const [movementType, setMovementType] = useState<string>("");
     const [showModal, setShowModal] = useState<boolean>(false);
@@ -19,12 +25,15 @@ export default function Home() {
     const [selectedCategory, setSelectedCategory] = useState<number>(0);
 
     useEffect(() => {
-        const fetchFromLocalStorage = async () => {
+        const fetchFromDB = async () => {
             const movements = await fetchDataFromDB();
-            setMovements(movements);
+            const userMovements = movements.filter(
+                (movement) => movement.uid === user.uid
+            );
+            setMovements(userMovements);
         };
-        fetchFromLocalStorage();
-    }, []);
+        fetchFromDB();
+    });
 
     useEffect(() => {
         setSelectedCategory(selectedCategory);
@@ -32,7 +41,8 @@ export default function Home() {
 
     const addMovement = (movement: Types.Movement) => {
         const id: string = uuid();
-        const newMovement = { ...movement, id };
+        const uid: string = user.uid;
+        const newMovement = { ...movement, id, uid };
         const newMovements = [...movements, newMovement];
         setMovements(newMovements);
         saveToDB(newMovement);
