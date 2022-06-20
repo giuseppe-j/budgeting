@@ -1,7 +1,7 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useNavigate } from "react-router-dom";
-import { auth } from "./shared/firebase";
+import { auth } from "../shared/firebase";
 import Home from "./Home";
 
 export default function HomeGuard() {

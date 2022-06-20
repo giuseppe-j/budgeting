@@ -1,16 +1,16 @@
-import AddButtons from "./components/AddButtons";
-import Navbar from "./components/Navbar";
-import Months from "./components/Months";
-import AddMovement from "./components/AddMovement";
-import Balance from "./components/Balance";
-import { fetchDataFromDB, saveToDB } from "./shared";
+import AddButtons from "./AddButtons";
+import Navbar from "./Navbar";
+import Months from "./Months";
+import AddMovement from "./AddMovement";
+import Balance from "./Balance";
+import { fetchDataFromDB, saveToDB } from "../shared";
 import { useEffect, useState } from "react";
 
 import { v4 as uuid } from "uuid";
 
-import * as Types from "./shared/types";
-import AccordionList from "./components/AccordionList";
-import { categories, getCategoryKey } from "./utils/categories";
+import * as Types from "../shared/types";
+import AccordionList from "./AccordionList";
+import { categories, getCategoryKey } from "../utils/categories";
 import { User } from "firebase/auth";
 
 type Props = {
@@ -33,7 +33,7 @@ export default function Home({ user }: Props) {
             setMovements(userMovements);
         };
         fetchFromDB();
-    });
+    }, [user.uid]);
 
     useEffect(() => {
         setSelectedCategory(selectedCategory);

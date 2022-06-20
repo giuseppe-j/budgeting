@@ -1,4 +1,4 @@
-import HomeGuard from "./HomeGuard";
+import HomeGuard from "./components/HomeGuard";
 
 export default function App() {
     return <HomeGuard />;
