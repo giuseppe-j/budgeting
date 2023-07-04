@@ -1,6 +1,6 @@
 # Budgeting
 
-Take control of your expenses and save money with this tool.
+A budget manager to take control of your expenses and save money.
 This project was created with React.
 
 ![image](https://github.com/giuseppe-j/budgeting/assets/61870439/967a4170-21c7-4f02-b767-80e704d726d8)
