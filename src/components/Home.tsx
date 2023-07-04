@@ -26,11 +26,8 @@ export default function Home({ user }: Props) {
 
     useEffect(() => {
         const fetchFromDB = async () => {
-            const movements = await fetchDataFromDB();
-            const userMovements = movements.filter(
-                (movement) => movement.uid === user.uid
-            );
-            setMovements(userMovements);
+            const movements = await fetchDataFromDB(user.uid);
+            setMovements(movements);
         };
         fetchFromDB();
     }, [user.uid]);

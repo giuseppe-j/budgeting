@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { auth, signInWithGoogle } from "./shared/firebase";
 import { useAuthState } from "react-firebase-hooks/auth";
 import Navbar from "./components/Navbar";
-// import "./Login.css";
+
 export default function Login() {
     const [user, loading, error] = useAuthState(auth);
     const navigate = useNavigate();

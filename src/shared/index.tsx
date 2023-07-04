@@ -1,9 +1,11 @@
 import * as Types from "./types";
 import { db } from "./firebase";
-import { collection, addDoc, getDocs } from "firebase/firestore";
+import { collection, addDoc, getDocs, where, query } from "firebase/firestore";
 
-export const fetchDataFromDB = async () => {
-    const snapshot = await getDocs(collection(db, "movements"));
+export const fetchDataFromDB = async (uid: string) => {
+    const movementRef = collection(db, "movements");
+    const q = query(movementRef, where("uid", "==", uid));
+    const snapshot = await getDocs(q);
     const data = snapshot.docs
         .map((doc) => doc.data())
         .map((movement) => {
