@@ -1,6 +1,12 @@
-# Getting Started with Create React App
+# Budgeting
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Take control of your expenses and save money with this tool.
+This project was created with React.
+
+![image](https://github.com/giuseppe-j/budgeting/assets/61870439/967a4170-21c7-4f02-b767-80e704d726d8)
+![image](https://github.com/giuseppe-j/budgeting/assets/61870439/89b0e9b8-d689-47f5-b24f-6ab4d5ceec9c)
+![image](https://github.com/giuseppe-j/budgeting/assets/61870439/cb326dbd-7fc4-4696-9ac8-c2a477cf76ff)
+
 
 ## Available Scripts
 
