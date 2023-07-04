@@ -3,8 +3,8 @@
 A budget manager to take control of your expenses and save money.
 This project was created with React.
 
-![image](https://github.com/giuseppe-j/budgeting/assets/61870439/967a4170-21c7-4f02-b767-80e704d726d8)
 ![image](https://github.com/giuseppe-j/budgeting/assets/61870439/89b0e9b8-d689-47f5-b24f-6ab4d5ceec9c)
+![image](https://github.com/giuseppe-j/budgeting/assets/61870439/1edb4eb2-f6bc-4c5e-b4e3-839e9d7fb6de)
 ![image](https://github.com/giuseppe-j/budgeting/assets/61870439/cb326dbd-7fc4-4696-9ac8-c2a477cf76ff)
 
 
